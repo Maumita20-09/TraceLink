@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>URL Redirect Checker</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h1>URL Redirect Checker</h1>
+
+<form method="POST">
+<input type="text" name="url" placeholder="Enter URL" required>
+<button type="submit">Check</button>
+</form>
+
+{% if redirects %}
+
+{% if warning %}
+<p style="color:red; font-weight:bold;">
+⚠ Warning: This URL has more than 3 redirects and may be suspicious.
+</p>
+{% endif %}
+
+<h2>Redirect Chain</h2>
+<ul>
+{% for r in redirects %}
+<li>{{ r.url }} → {{ r.status }}</li>
+{% endfor %}
+</ul>
+
+{% endif %}
+
+</body>
+</html>
